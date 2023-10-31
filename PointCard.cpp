@@ -10,12 +10,7 @@ CSCI 335 Fall Term 2023
  * @post: Construct a new Point Card object
  */
 PointCard::PointCard() {
-    Card* point_card = new PointCard();
-
-    point_card->setImageData(nullptr);
-    point_card->setType(POINT_CARD);
-    point_card->setDrawn(false);
-    point_card->setInstruction(point_card->getInstruction());
+    //Card* point_card = new PointCard();
 }
 /**
  * @return true if the card is playable, false otherwise

@@ -10,12 +10,7 @@
  * @post: Construct a new Action Card object
 */
 ActionCard::ActionCard() {
-    Card* action_card = new ActionCard();
-
-    action_card->setImageData(nullptr);
-    action_card->setType(ACTION_CARD);
-    action_card->setDrawn(false);
-    action_card->setInstruction(action_card->getInstruction());
+    //Card* action_card = new ActionCard();
 }
 
 /**
@@ -33,6 +28,7 @@ bool ActionCard::isPlayable() {
         if(getDrawn()){
             return true;
         }
+        return false;
     }
     return false;
 }

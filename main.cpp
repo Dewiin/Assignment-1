@@ -6,8 +6,7 @@
 using namespace std;
 
 int main() {
-    ActionCard test1;
-    PointCard test2;
+    Card* action_card = new ActionCard();
 
     cout << "hello";
 }

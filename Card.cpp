@@ -48,7 +48,6 @@ Card& Card::operator=(const Card& rhs) {
 * @param: rvalue reference to a Card object
 */
 Card::Card(Card&& rhs) {
-    delete [] bitmap_;
     bitmap_ = rhs.bitmap_;
     rhs.bitmap_ = nullptr;
 
@@ -67,7 +66,6 @@ Card::Card(Card&& rhs) {
 * @return this card object
 */
 Card& Card::operator=(Card&& rhs) {
-    delete [] bitmap_;
     bitmap_ = rhs.bitmap_;
     rhs.bitmap_ = nullptr;
 

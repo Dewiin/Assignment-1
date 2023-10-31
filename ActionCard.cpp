@@ -10,7 +10,7 @@
  * @post: Construct a new Action Card object
 */
 ActionCard::ActionCard() {
-    //Card* action_card = new ActionCard();
+    setType(ACTION_CARD);
 }
 
 /**

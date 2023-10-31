@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "__locale": "cpp",
+        "__split_buffer": "cpp",
+        "bitset": "cpp",
+        "compare": "cpp",
+        "ios": "cpp",
+        "istream": "cpp",
+        "locale": "cpp",
+        "ostream": "cpp",
+        "streambuf": "cpp",
+        "type_traits": "cpp",
+        "typeinfo": "cpp",
+        "vector": "cpp",
+        "regex": "cpp",
+        "iostream": "cpp",
+        "new": "cpp",
+        "deque": "cpp"
+    }
+}

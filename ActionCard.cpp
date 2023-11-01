@@ -54,5 +54,5 @@ void ActionCard::Print() const {
 
     cout << "Type: " << getType() << endl << 
     "Instruction: " << getInstruction() << endl <<
-    "Card: " << *getImageData() << endl;
+    "Card: " << *getImageData();
 }

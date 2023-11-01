@@ -11,8 +11,7 @@
 * @post: Destroy the Card object
 */
 Card::~Card() {
-    delete [] bitmap_;
-    bitmap_ = nullptr;
+    delete bitmap_;
     instruction_.clear();
     drawn_ = false;
 }
@@ -23,7 +22,7 @@ Card::~Card() {
 * @param: const reference to a Card object
 */
 Card::Card(const Card& rhs) {
-    bitmap_ = rhs.bitmap_;
+    bitmap_ = new int(*rhs.bitmap_);
     cardType_ = rhs.cardType_;
     instruction_ = rhs.instruction_;
     drawn_ = rhs.drawn_;
@@ -35,10 +34,12 @@ Card::Card(const Card& rhs) {
 * @return this Card object
 */
 Card& Card::operator=(const Card& rhs) {
-    bitmap_ = rhs.bitmap_;
-    cardType_ = rhs.cardType_;
-    instruction_ = rhs.instruction_;
-    drawn_ = rhs.drawn_;
+    if(this != &rhs){
+        *bitmap_ = *rhs.bitmap_;
+        cardType_ = rhs.cardType_;
+        instruction_ = rhs.instruction_;
+        drawn_ = rhs.drawn_;
+    }
 
     return *this;
 }
@@ -66,16 +67,10 @@ Card::Card(Card&& rhs) {
 * @return this card object
 */
 Card& Card::operator=(Card&& rhs) {
-    bitmap_ = rhs.bitmap_;
-    rhs.bitmap_ = nullptr;
-
-    cardType_ = rhs.cardType_;
-
-    instruction_ = rhs.instruction_;
-    rhs.instruction_.clear();
-
-    drawn_ = rhs.drawn_;
-    rhs.drawn_ = false;
+    swap(bitmap_, rhs.bitmap_);
+    swap(cardType_, rhs.cardType_);
+    swap(instruction_, rhs.instruction_);
+    swap(drawn_, rhs.drawn_);
 
     return *this;
 }
@@ -86,7 +81,7 @@ Card& Card::operator=(Card&& rhs) {
 */
 Card::Card() {
     //all bitmap_ is nullptr
-    bitmap_ = nullptr;
+    bitmap_ = new int[80];
     instruction_ = "";
     drawn_ = false;
 }
@@ -156,5 +151,5 @@ bool Card::getDrawn() const {
 * @param: const reference to a boolean
 */
 void Card::setDrawn(const bool& drawn) {
-    this->drawn_ = drawn;
+    drawn_ = drawn;
 }

@@ -16,7 +16,9 @@ Deck<CardType>::Deck() {}
 * @post: Destroy the Deck object
 */
 template <class CardType>
-Deck<CardType>::~Deck() {}
+Deck<CardType>::~Deck() {
+    cards_.clear();
+}
 
 /**
 * @post: Add a Card to the Deck
@@ -40,7 +42,7 @@ CardType&& Deck<CardType>::Draw() {
 
         return move(drawn);
     }
-    throw(runtime_error("The deck is empty."));
+    return;
 }  
 
 /**

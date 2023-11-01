@@ -32,7 +32,9 @@ Hand::Hand(const Hand& other) {
 * @return this Hand
 */
 Hand& Hand::operator=(const Hand& other) {
-    cards_ = other.cards_;
+    if(this != &other){
+        cards_ = other.cards_;
+    }
 
     return *this;
 }
@@ -42,8 +44,7 @@ Hand& Hand::operator=(const Hand& other) {
 * @param: other Hand object
 */
 Hand::Hand(Hand&& other) {
-    cards_ = other.cards_;
-    other.cards_.clear();
+    cards_ = move(other.cards_);
 }
 
 /**
@@ -52,8 +53,9 @@ Hand::Hand(Hand&& other) {
 * @return this Hand
 */
 Hand& Hand::operator=(Hand&& other) {
-    cards_ = other.cards_;
-    other.cards_.clear();
+    if(this != &other){
+        cards_ = move(other.cards_);
+    }
 
     return *this;
 }
@@ -70,7 +72,7 @@ const deque<PointCard>& Hand::getCards() const {
 * @param PointCard object
 */
 void Hand::addCard(PointCard&& card) {
-    cards_.push_back(card);
+    cards_.push_back(move(card));
 }
 
 /**
@@ -84,13 +86,7 @@ bool Hand::isEmpty() const {
 * @post: Reverse the hand
 */
 void Hand::Reverse() {
-    deque<PointCard> new_hand;
-
-    for(int i = cards_.size()-1; i >= 0; i--) {
-        new_hand.push_back(cards_[i]);
-    }
-
-    cards_ = new_hand;
+    reverse(cards_.begin(), cards_.end());
 }
 
 /**
@@ -102,37 +98,21 @@ hand
 */
 int Hand::PlayCard() {
     if(isEmpty()) {
-        cout << "Hand is empty.";
-        return -1;
+        throw runtime_error("Hand is empty.");
     }
-
+    
+    //if playable
     if(cards_.front().isPlayable()){
-        int points = stoi(cards_[0].getInstruction());
+        int points = stoi(cards_.front().getInstruction());
 
         //remove card from hand
         cards_.pop_front();
-
-        //move all cards back one index
-        for(int i = 1; i < cards_.size(); i++) {
-            cards_[i-1] = cards_[i];
-        }
-
-        //remove last index
-        cards_.pop_back();
         
         return points;
     }
-    else{
-        cout << "Card is not playable";
 
-        //remove card from hand
-        cards_.pop_front();
+    //if not playable
+    cards_.pop_front();
 
-        //move all cards back one index
-        for(int i = 1; i < cards_.size(); i++) {
-            cards_[i-1] = cards_[i];
-        }
-
-        return -1;
-    }
+    throw runtime_error("Card is not playable.");
 }

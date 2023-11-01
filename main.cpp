@@ -5,13 +5,7 @@ using namespace std;
 
 
 int main() {
-    Card* action_card = new ActionCard();
-    action_card->setInstruction("DRAW 7 CARDS");
-    action_card->setDrawn(true);
+    Hand hand;
 
-    action_card->Print();
-    cout << endl << action_card->isPlayable();
-
-    Deck<PointCard> deck1;
-    cout << deck1.IsEmpty();
+    hand.PlayCard();
 }

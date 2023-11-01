@@ -15,6 +15,7 @@
         "regex": "cpp",
         "iostream": "cpp",
         "new": "cpp",
-        "deque": "cpp"
+        "deque": "cpp",
+        "string": "cpp"
     }
 }

@@ -9,7 +9,7 @@ CSCI 335 Fall Term 2023
 /**
 * @post: Construct a new Hand object
 */
-Hand::Hand() {}
+Hand::Hand(){}
 
 /**
 * @post: Destroy the Hand object
@@ -86,7 +86,13 @@ bool Hand::isEmpty() const {
 * @post: Reverse the hand
 */
 void Hand::Reverse() {
-    reverse(cards_.begin(), cards_.end());
+    size_t left = 0, right = cards_.size()-1;
+
+    while(left < right){
+        swap(cards_[left], cards_[right]);
+        left++;
+        right--;
+    }
 }
 
 /**
@@ -103,15 +109,15 @@ int Hand::PlayCard() {
     
     //if playable
     if(cards_.front().isPlayable()){
-        //get the integer value of the front card in hand
+        //get the integer value of the points in the front card of the hand
         int points = stoi(cards_.front().getInstruction());
 
         //remove card from hand
         cards_.pop_front();
         
+        
         return points;
     }
-
     //if not playable
     cards_.pop_front();
 

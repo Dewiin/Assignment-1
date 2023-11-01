@@ -45,14 +45,21 @@ bool ActionCard::isPlayable() {
  * Note: For [ImageData]: If there is no image data, print "No image data" instead
  */
 void ActionCard::Print() const {
-    if(getImageData() == nullptr){
-        cout << "Type: " << getType() << endl << 
-        "Instruction: " << getInstruction() << endl <<
-        "Card: No image data";
-        return;
-    }
+    // Print the card type
+    cout << "Type: " << getType() << endl;
 
-    cout << "Type: " << getType() << endl << 
-    "Instruction: " << getInstruction() << endl <<
-    "Card: " << *getImageData();
+    // Print the instruction
+    cout << "Instruction: " << getInstruction() << endl;
+
+    // Print the image data or "No image data" if it's not available
+    const int* imageData = getImageData();
+    if (imageData != nullptr) {
+        cout << "Card:" << endl;
+        for (int i = 0; i < 80; i++) { 
+            cout << imageData[i] << " ";
+        }
+        cout << endl;
+    } else {
+        cout << "Card:\nNo image data" << endl;
+    }
 }

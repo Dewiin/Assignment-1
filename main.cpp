@@ -11,4 +11,7 @@ int main() {
 
     action_card->Print();
     cout << endl << action_card->isPlayable();
+
+    Deck<PointCard> deck1;
+    cout << deck1.IsEmpty();
 }

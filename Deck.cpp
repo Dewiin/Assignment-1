@@ -36,8 +36,8 @@ void Deck<CardType>::AddCard(const CardType& card) {
 */
 template <class CardType>
 CardType&& Deck<CardType>::Draw() {
-    if(!IsEmpty()){ 
-        CardType drawn = cards_.back();
+    if(!IsEmpty()) { 
+        CardType&& drawn = move(cards_.back());
         cards_.pop_back();
 
         return move(drawn);
@@ -66,9 +66,10 @@ mersenne twister engine
 template <class CardType>
 void Deck<CardType>::Shuffle() {
     //create random number generator with mt19937
-    mt19937 random(2028358904);
+    mt19937 seed(2028358904);
 
-    shuffle(cards_.begin(), cards_.end(), random);
+    //shuffle with rng seed
+    shuffle(cards_.begin(), cards_.end(), seed);
 }
 
 /**

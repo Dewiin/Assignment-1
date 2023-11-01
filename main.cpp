@@ -5,9 +5,8 @@ using namespace std;
 
 
 int main() {
-    Card* action_card = new ActionCard();
     Card* point_card = new PointCard();
-
-    //action_card->Print();
+    point_card->setInstruction('9');
+    
     point_card->Print();
 }

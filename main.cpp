@@ -5,15 +5,9 @@ using namespace std;
 
 
 int main() {
-    int* img_data;
-    img_data = new int[10];
-
-    for(auto i ){
-        img_data[i] = i;
-    }
     Card* action_card = new ActionCard();
-    action_card->setImageData(img_data);
+    Card* point_card = new PointCard();
 
-    action_card->Print();
-
+    //action_card->Print();
+    point_card->Print();
 }

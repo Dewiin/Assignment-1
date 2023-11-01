@@ -11,6 +11,7 @@ CSCI 335 Fall Term 2023
  */
 PointCard::PointCard() {
     setType(POINT_CARD);
+    setInstruction(getInstruction());
 }
 /**
  * @return true if the card is playable, false otherwise
@@ -41,6 +42,7 @@ void PointCard::Print() const {
         cout << "Type: " << getType() << endl <<
         "Points: " << getInstruction() << endl <<
         "Card: No image data";
+        return;
     }
 
     cout << "Type: " << getType() << endl <<

@@ -42,7 +42,7 @@ CardType&& Deck<CardType>::Draw() {
 
         return move(drawn);
     }
-    return;
+    throw runtime_error("Deck is empty.");
 }  
 
 /**

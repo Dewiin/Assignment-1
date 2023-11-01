@@ -103,6 +103,7 @@ int Hand::PlayCard() {
     
     //if playable
     if(cards_.front().isPlayable()){
+        //get the integer value of the front card in hand
         int points = stoi(cards_.front().getInstruction());
 
         //remove card from hand

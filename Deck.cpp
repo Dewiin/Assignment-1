@@ -10,9 +10,7 @@ Implementation of Deck
 * @post: Construct a new Deck object
 */
 template <class CardType>
-Deck<CardType>::Deck() {
-    cout << "TODO";
-}
+Deck<CardType>::Deck() {}
 
 /**
 * @post: Destroy the Deck object

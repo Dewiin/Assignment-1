@@ -1,12 +1,19 @@
 #include <iostream>
 #include <vector>
-#include "Card.hpp"
-#include "ActionCard.hpp"
-#include "PointCard.hpp"
+#include "Player.hpp"
 using namespace std;
 
-int main() {
-    Card* action_card = new ActionCard();
 
-    cout << "hello";
+int main() {
+    int* img_data;
+    img_data = new int[10];
+
+    for(auto i ){
+        img_data[i] = i;
+    }
+    Card* action_card = new ActionCard();
+    action_card->setImageData(img_data);
+
+    action_card->Print();
+
 }

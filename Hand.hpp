@@ -1,8 +1,8 @@
 /*
 CSCI335 Fall 2023
 Assignment 1 – Card Game
-Name
-Date
+Name: Devin Xie
+Date: Oct 27 2023
 Hand.cpp Defines the Hand class.
 */
 

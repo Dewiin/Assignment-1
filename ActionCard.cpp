@@ -24,7 +24,8 @@ ActionCard::ActionCard() {
  * SWAP HAND WITH OPPONENT : swap the hand with the opponent
 */
 bool ActionCard::isPlayable() {
-    const regex pattern("((DRAW|PLAY)\\[/s0-9/s]{1}\\(CARD(S)?)|(REVERSE HAND)|(SWAP HAND WITH OPPONENT))");
+    const regex pattern("^(DRAW \\d+ CARD(S)?|REVERSE HAND|PLAY \\d+ CARD(S)?|SWAP HAND WITH OPPONENT)$");
+
     if(regex_match(getInstruction(), pattern)){
         if(getDrawn()){
             return true;
@@ -47,7 +48,7 @@ void ActionCard::Print() const {
     if(getImageData() == nullptr){
         cout << "Type: " << getType() << endl << 
         "Instruction: " << getInstruction() << endl <<
-        "Card: No image data" << endl;
+        "Card: No image data";
         return;
     }
 

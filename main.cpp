@@ -5,8 +5,10 @@ using namespace std;
 
 
 int main() {
-    Card* point_card = new PointCard();
-    point_card->setInstruction("9");
+    Card* action_card = new ActionCard();
+    action_card->setInstruction("DRAW 17 CARDS");
+    action_card->setDrawn(true);
     
-    point_card->Print();
+    action_card->Print();
+    cout << endl << action_card->isPlayable();
 }

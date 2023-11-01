@@ -19,7 +19,7 @@ PointCard::PointCard() {
 */
 bool PointCard::isPlayable() {
     for(char c : getInstruction()){
-        if(!(int(c) >= 48 && int(c) <= 57)) {
+        if(!isdigit(c)) {
             return false;
         }
     }

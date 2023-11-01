@@ -97,10 +97,10 @@ Card::Card() {
 string Card::getType() const {
     string type;
     if(cardType_ == POINT_CARD){
-        type = "POINT CARD";
+        type = "POINT_CARD";
     }
     if(cardType_ == ACTION_CARD){
-        type =  "ACTION CARD";
+        type =  "ACTION_CARD";
     }
     return type;
 }

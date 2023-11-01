@@ -29,7 +29,7 @@ bool ActionCard::isPlayable() {
     }
 
     //Regex patterns
-    regex drawPlayPattern(R"(^(DRAW|PLAY) (\d+) CARD(S)?$)");
+    regex drawPlayPattern(R"(^(DRAW|PLAY) (\d) CARD(S)?$)");
     regex reversePattern(R"(^REVERSE HAND$)");
     regex swapPattern(R"(^SWAP HAND WITH OPPONENT$)");
 

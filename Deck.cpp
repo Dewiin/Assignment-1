@@ -16,9 +16,7 @@ Deck<CardType>::Deck() {}
 * @post: Destroy the Deck object
 */
 template <class CardType>
-Deck<CardType>::~Deck() {
-    cards_.clear();
-}
+Deck<CardType>::~Deck() {}
 
 /**
 * @post: Add a Card to the Deck
@@ -36,14 +34,13 @@ void Deck<CardType>::AddCard(const CardType& card) {
 */
 template <class CardType>
 CardType&& Deck<CardType>::Draw() {
-    if(IsEmpty()){ 
-        throw(runtime_error("The deck is empty."));
+    if(!IsEmpty()){ 
+        CardType drawn = cards_.back();
+        cards_.pop_back();
+
+        return move(drawn);
     }
-
-    CardType drawn = cards_.back();
-    cards_.pop_back();
-
-    return move(drawn);
+    throw(runtime_error("The deck is empty."));
 }  
 
 /**
@@ -66,7 +63,10 @@ mersenne twister engine
 */
 template <class CardType>
 void Deck<CardType>::Shuffle() {
-    cout << "TODO";
+    //create random number generator with mt19937
+    mt19937 random(2028358904);
+
+    shuffle(cards_.begin(), cards_.end(), random);
 }
 
 /**

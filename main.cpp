@@ -36,6 +36,13 @@ int main() {
     hand1.addCard(move(point3));
     hand1.addCard(move(point4));
 
+    Hand hand2;
+    hand2 = hand1;
+
+    for(auto i : hand2.getCards()){
+        cout << hand2.PlayCard() << endl;
+    }
+
 
     return 0;
 }

@@ -48,7 +48,10 @@ Hand& Hand::operator=(const Hand& other) {
 * @param: other Hand object
 */
 Hand::Hand(Hand&& other) {
-    cards_ = move(other.cards_);
+    for(auto c : other.cards_){
+        cards_.push_back(c);
+    }
+    other.cards_.clear();
 }
 
 /**
@@ -58,7 +61,10 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
-        cards_ = move(other.cards_);
+        for(auto c : other.cards_){
+            cards_.push_back(c);
+        }
+        other.cards_.clear();
     }
 
     return *this;

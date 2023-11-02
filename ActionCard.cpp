@@ -26,9 +26,9 @@ bool ActionCard::isPlayable() {
     if(!getDrawn()){
         return false;
     }
-
+    
     //Regex patterns
-    regex pattern(R"(^(DRAW|PLAY) (\d+) CARD(S)?$)");
+    regex pattern(R"(^(DRAW|PLAY)\s(\d+)\sCARD(S)?$)");
 
     if( regex_match(getInstruction(), pattern) || 
         getInstruction() == "REVERSE HAND" ||

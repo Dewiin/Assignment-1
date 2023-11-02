@@ -72,7 +72,7 @@ const deque<PointCard>& Hand::getCards() const {
 * @param PointCard object
 */
 void Hand::addCard(PointCard&& card) {
-    cards_.push_back(card);
+    cards_.push_back(move(card));
 }
 
 /**
@@ -86,13 +86,7 @@ bool Hand::isEmpty() const {
 * @post: Reverse the hand
 */
 void Hand::Reverse() {
-    size_t left = 0, right = cards_.size()-1;
-
-    while(left < right){
-        swap(cards_[left], cards_[right]);
-        left++;
-        right--;
-    }
+    reverse(cards_.begin(), cards_.end());
 }
 
 /**
@@ -103,23 +97,21 @@ hand
 * @return the points earned from playing the card
 */
 int Hand::PlayCard() {
-    if(isEmpty()) {
-        throw runtime_error("Hand is empty.");
-    }
-    
-    //if playable
-    if(cards_.front().isPlayable()){
-        //get the integer value of the points in the front card of the hand
-        int points = stoi(cards_.front().getInstruction());
+    if(!isEmpty()) {
+        PointCard front = move(cards_.front());
 
         //remove card from hand
         cards_.pop_front();
-        
-        
-        return points;
-    }
-    //if not playable
-    cards_.pop_front();
 
-    throw runtime_error("Card is not playable.");
+        //if playable
+        if(front.isPlayable()){
+            //get the integer value of the points in the front card of the hand
+            int points = stoi(front.getInstruction());
+            
+            return points;
+        }
+            
+        throw runtime_error("Card is not playable.");
+    }
+    throw runtime_error("Hand is empty.");
 }

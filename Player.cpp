@@ -9,7 +9,7 @@ CSCI 335 Fall Term 2023
 /**
 * @post: Construct a new Player object
 */
-Player::Player() {
+Player::Player(){
     score_ = 0;
     opponent_ = nullptr;
     actiondeck_ = nullptr;
@@ -21,12 +21,11 @@ Player::Player() {
 */
 Player::~Player() {
     score_ = 0;
-
-    delete [] opponent_;
+    delete opponent_;
     opponent_ = nullptr;
-    delete [] actiondeck_;
+    delete actiondeck_;
     actiondeck_ = nullptr;
-    delete [] pointdeck_;
+    delete pointdeck_;
     pointdeck_ = nullptr;
 }
 

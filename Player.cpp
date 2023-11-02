@@ -10,6 +10,8 @@ CSCI 335 Fall Term 2023
 * @post: Construct a new Player object
 */
 Player::Player(){
+    Hand initial_hand;
+    setHand(initial_hand);
     score_ = 0;
     opponent_ = nullptr;
     actiondeck_ = nullptr;
@@ -20,13 +22,14 @@ Player::Player(){
 * @post: Destroy the Player object
 */
 Player::~Player() {
-    score_ = 0;
-    delete opponent_;
-    opponent_ = nullptr;
-    delete actiondeck_;
-    actiondeck_ = nullptr;
-    delete pointdeck_;
-    pointdeck_ = nullptr;
+    if(actiondeck_ != nullptr){
+        delete [] actiondeck_;
+        actiondeck_ = nullptr;
+    }
+    if(pointdeck_ != nullptr){
+        delete [] pointdeck_;
+        pointdeck_ = nullptr;
+    }
 }
 
 /**
@@ -66,24 +69,34 @@ void Player::setScore(const int& score) {
 * PLAYING ACTION CARD: [instruction]
 */
 void Player::play(ActionCard&& card) {
-    cout << "PLAYING ACTION CARD: " << card.getInstruction();
+    if(card.isPlayable()){
+        cout << "PLAYING ACTION CARD: " << card.getInstruction();
 
-    if(card.getInstruction() == "REVERSE HAND") {
-        hand_.Reverse();
+        
+
+
+        if(card.getInstruction() == "REVERSE HAND") {
+            hand_.Reverse();
+        }
+        else if(card.getInstruction() == "SWAP HAND WITH OPPONENT") {
+            if(opponent_ != nullptr) {
+                Hand temp = hand_;
+                setHand(opponent_->getHand());
+                opponent_->setHand(temp);
+            }
+            throw runtime_error("No valid opponent.");
+        }  
+
     }
-    else if(card.getInstruction() == "SWAP HAND WITH OPPONENT") {
-        Hand temp = hand_;
-        hand_ = opponent_->getHand();
-        opponent_->setHand(temp);
-    }  
-    
 }
 
 /**
 * @post: Draw a point card and place it in the player’s hand
 */
 void Player::drawPointCard() {
-    hand_.addCard(pointdeck_->Draw());
+    if(pointdeck_ != nullptr && !pointdeck_->IsEmpty()){
+        hand_.addCard(pointdeck_->Draw());
+    }
 }
 
 /**
@@ -91,7 +104,9 @@ void Player::drawPointCard() {
 s score
 */
 void Player::playPointCard() {
-    setScore(getScore() + hand_.PlayCard());
+    if(!hand_.isEmpty()){
+        setScore(getScore() + hand_.PlayCard());
+    }
 }
 
 /**

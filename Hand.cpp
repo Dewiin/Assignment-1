@@ -24,8 +24,8 @@ Hand::~Hand() {
 */
 Hand::Hand(const Hand& other) {
     //manually copy each card in other deque to this->deque
-    for(auto c : other.cards_){
-        cards_.push_back(c);
+    for(auto card : other.cards_){
+        cards_.push_back(card);
     }
 }
 
@@ -36,9 +36,14 @@ Hand::Hand(const Hand& other) {
 */
 Hand& Hand::operator=(const Hand& other) {
     if(this != &other){
+        if(!cards_.empty()){
+            //clear current deque
+            cards_.clear();
+        }
+
         //manually copy each card in other deque to this->deque
-        for(auto c : other.cards_){
-            cards_.push_back(c);
+        for(auto card : other.cards_){
+            cards_.push_back(card);
         }
     }
 
@@ -50,8 +55,9 @@ Hand& Hand::operator=(const Hand& other) {
 * @param: other Hand object
 */
 Hand::Hand(Hand&& other) {
-    //transfer ownership of cards in deque
-    cards_ = move(other.cards_);
+    //copy contents
+    cards_ = other.cards_;
+
     //clear other cards_
     other.cards_.clear();
 }
@@ -63,11 +69,13 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
-        //clear current deque in hand
-        cards_.clear();
+        if(!cards_.empty()){
+            //clear current deque in hand
+            cards_.clear();
+        }
 
-        //transfer ownership
-        cards_ = move(other.cards_);
+        //copy contents
+        cards_ = other.cards_;
 
         //clear other.cards_
         other.cards_.clear();

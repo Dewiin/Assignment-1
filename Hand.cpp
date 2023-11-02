@@ -23,7 +23,9 @@ Hand::~Hand() {
 * @param: other Hand object
 */
 Hand::Hand(const Hand& other) {
-    cards_ = other.cards_;
+    for(auto c : other.cards_){
+        cards_.push_back(c);
+    }
 }
 
 /**
@@ -33,7 +35,9 @@ Hand::Hand(const Hand& other) {
 */
 Hand& Hand::operator=(const Hand& other) {
     if(this != &other){
-        cards_ = other.cards_;
+        for(auto c : other.cards_){
+            cards_.push_back(c);
+        }
     }
 
     return *this;
@@ -105,18 +109,26 @@ hand
 * @return the points earned from playing the card
 */
 int Hand::PlayCard() {
+    //check if not empty
     if(!isEmpty()) {
         //if not playable
         if(!cards_.front().isPlayable()){
+            //remove from hand
             cards_.pop_front();
+            //throw exception
             throw runtime_error("Card is not playable.");
         }
+        //else (if playable)
+
         //get the integer value of the points in the front card of the hand
         int points = stoi(cards_.front().getInstruction());
-
+        //remove from hand
         cards_.pop_front();
-        
+        //return points
         return points;
     }
+    //else (if empty)
+
+    //throw exception   
     throw runtime_error("Hand is empty.");
 }

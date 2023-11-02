@@ -23,10 +23,10 @@ ActionCard::ActionCard() {
  * SWAP HAND WITH OPPONENT : swap the hand with the opponent
 */
 bool ActionCard::isPlayable() {
-    string instruction = getInstruction();
-    
+    const string instruction = getInstruction();
+
     //Regex patterns
-    regex pattern(R"((DRAW|PLAY)\s+(\d+)\s+CARD(S)?|REVERSE\sHAND|SWAP\sHAND\sWITH\sOPPONENT)");
+    regex pattern(R"((DRAW|PLAY) (\d+) CARD(S)?|REVERSE HAND|SWAP HAND WITH OPPONENT)");
 
     return regex_match(instruction, pattern);
 }

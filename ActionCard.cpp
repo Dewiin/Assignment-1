@@ -25,7 +25,7 @@ ActionCard::ActionCard() {
 bool ActionCard::isPlayable() {
     string instruction = getInstruction();
 
-    if(instruction == "SWAP HAND" || instruction == "SWAP HAND WITH OPPONENT"){
+    if(instruction == "REVERSE HAND" || instruction == "SWAP HAND WITH OPPONENT"){
         return true;
     }
     //Regex patterns

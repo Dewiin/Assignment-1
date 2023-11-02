@@ -11,7 +11,6 @@
 */
 ActionCard::ActionCard() {
     setType(ACTION_CARD);
-    setInstruction(getInstruction());
 }
 
 /**

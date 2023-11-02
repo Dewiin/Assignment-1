@@ -5,7 +5,16 @@ using namespace std;
 
 
 int main() {
-    Hand hand;
+    PointCard point_card;
+    point_card.setInstruction("9");
+    point_card.Print();
 
-    hand.PlayCard();
+    Hand hand;
+    hand.addCard(move(point_card));
+
+    deque<PointCard> temp = hand.getCards();
+
+    for(int i = 0; i < temp.size(); i++){
+        temp[i].Print();
+    }
 }

@@ -76,11 +76,21 @@ Card::Card(Card&& rhs) {
 */
 Card& Card::operator=(Card&& rhs) {
     if (this != &rhs) {
+        //clear current bitmap
         delete[] bitmap_;
+
+        //transfer bitmap ownership
         bitmap_ = rhs.bitmap_;
+        //set rhs bitmap to nullptr
         rhs.bitmap_ = nullptr;
+
+        //transfer cardType ownership
         cardType_ = rhs.cardType_;
+
+        //transfer instruction ownership
         instruction_ = move(rhs.instruction_);
+
+        //transfer drawn ownership
         drawn_ = rhs.drawn_;
         rhs.drawn_ = false;
     }

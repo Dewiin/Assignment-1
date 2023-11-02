@@ -31,7 +31,7 @@ class PointCard : public Card
          * Card: 
          * [ImageData]
          * 
-         * Note: For [ImageData]: If there is no image data, print "No image data" instead
+         *  Note: For [ImageData]: If there is no image data, print "No image data" instead
          */
         void Print() const override;
 };

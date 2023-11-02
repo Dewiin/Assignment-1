@@ -98,20 +98,20 @@ hand
 */
 int Hand::PlayCard() {
     if(!isEmpty()) {
-        PointCard front = move(cards_.front());
+        PointCard front = cards_.front();
 
         //remove card from hand
         cards_.pop_front();
 
-        //if playable
-        if(front.isPlayable()){
-            //get the integer value of the points in the front card of the hand
-            int points = stoi(front.getInstruction());
-            
-            return points;
+        //if not playable
+        if(!front.isPlayable()){
+            throw runtime_error("Card is not playable.");
         }
+
+        //get the integer value of the points in the front card of the hand
+        int points = stoi(front.getInstruction());
             
-        throw runtime_error("Card is not playable.");
+        return points;
     }
     throw runtime_error("Hand is empty.");
 }

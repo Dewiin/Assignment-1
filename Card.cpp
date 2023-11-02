@@ -11,11 +11,14 @@
 * @post: Destroy the Card object
 */
 Card::~Card() {
-    if(bitmap_ != nullptr){
-        delete[] bitmap_;
-        bitmap_ = nullptr;
-    }
+    //delete allocated array
+    delete[] bitmap_;
+    //set pointer to nullptr
+    bitmap_ = nullptr;
+
+    //clear instructions
     instruction_.clear();
+    //reset drawn bool
     drawn_ = false;
 }
 
@@ -25,10 +28,23 @@ Card::~Card() {
 * @param: const reference to a Card object
 */
 Card::Card(const Card& rhs) {
+    //allocate an empty array of 80 zeros
     bitmap_ = new int[80];
+
+    // for(int i = 0; i < 80; i++){
+    //     bitmap_[i] = rhs.bitmap_[i];
+    // }
+
+    //std::copy rhs bitmap to this->bitmap
     copy(rhs.bitmap_, rhs.bitmap_ + 80, bitmap_);
+
+    //copy cardType
     cardType_ = rhs.cardType_;
+
+    //copy instructions
     instruction_ = rhs.instruction_;
+
+    //copy drawn bool
     drawn_ = rhs.drawn_;
 }
 
@@ -39,14 +55,26 @@ Card::Card(const Card& rhs) {
 */
 Card& Card::operator=(const Card& rhs) {
     if(this != &rhs){
+        //clear current bitmap
         if(bitmap_ != nullptr){
             delete[] bitmap_;
             bitmap_ = nullptr;
         }
         bitmap_ = new int[80];
+        // for(int i = 0; i < 80; i++){
+        //     bitmap_[i] = rhs.bitmap_[i];
+        // }
+
+        //std::copy
         copy(rhs.bitmap_, rhs.bitmap_ + 80, bitmap_);
+
+        //copy cardType
         cardType_ = rhs.cardType_;
+        
+        //copy instructions
         instruction_ = rhs.instruction_;
+
+        //copy drawn bool
         drawn_ = rhs.drawn_;
     }
 
@@ -58,14 +86,20 @@ Card& Card::operator=(const Card& rhs) {
 * @param: rvalue reference to a Card object
 */
 Card::Card(Card&& rhs) {
+    //copy bitmap
     bitmap_ = rhs.bitmap_;
+    //clear rhs bitmap
     rhs.bitmap_ = nullptr;
 
+    //copy cardType
     cardType_ = rhs.cardType_;
 
+    //transfer ownership of instructions
     instruction_ = move(rhs.instruction_);
 
+    //copy drawn bool
     drawn_ = rhs.drawn_;
+    //reset rhs drawn bool
     rhs.drawn_ = false;
 }
 
@@ -103,9 +137,13 @@ Card& Card::operator=(Card&& rhs) {
 * @post: Construct a new Card object
 */
 Card::Card() {
-    //all bitmap_ is nullptr
+    //allocate an empty array of 80 zeros
     bitmap_ = new int[80];
+
+    //empty string of instructions
     instruction_ = "";
+
+    //drawn set to false by default
     drawn_ = false;
 }
 

@@ -56,7 +56,7 @@ Hand& Hand::operator=(const Hand& other) {
 */
 Hand::Hand(Hand&& other) {
     //copy contents
-    cards_ = other.cards_;
+    cards_ = move(other.cards_);
 
     //clear other cards_
     other.cards_.clear();
@@ -75,7 +75,7 @@ Hand& Hand::operator=(Hand&& other) {
         }
 
         //copy contents
-        cards_ = other.cards_;
+        cards_ = move(other.cards_);
 
         //clear other.cards_
         other.cards_.clear();

@@ -23,13 +23,15 @@ ActionCard::ActionCard() {
  * SWAP HAND WITH OPPONENT : swap the hand with the opponent
 */
 bool ActionCard::isPlayable() {
-    if((getInstruction() == "SWAP HAND" || getInstruction() == "SWAP HAND WITH OPPONENT")){
+    string instruction = getInstruction();
+
+    if(instruction == "SWAP HAND" || instruction == "SWAP HAND WITH OPPONENT"){
         return true;
     }
     //Regex patterns
     regex pattern(R"((DRAW|PLAY)\s+(\d+)\s+CARD(S)?)");
 
-    return regex_match(getInstruction(), pattern);
+    return regex_match(instruction, pattern);
 }
 
 /**

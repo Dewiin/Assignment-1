@@ -72,8 +72,6 @@ void Player::play(ActionCard&& card) {
     if(card.isPlayable()){
         cout << "PLAYING ACTION CARD: " << card.getInstruction();
 
-        
-
 
         if(card.getInstruction() == "REVERSE HAND") {
             hand_.Reverse();

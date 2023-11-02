@@ -103,14 +103,8 @@ Card::Card() {
 * @return the string representation of the card type
 */
 string Card::getType() const {
-    string type;
-    if(cardType_ == POINT_CARD){
-        type = "POINT_CARD";
-    }
-    if(cardType_ == ACTION_CARD){
-        type =  "ACTION_CARD";
-    }
-    return type;
+   string type = (cardType_ == POINT_CARD) ? "POINT_CARD" : "ACTION_CARD";
+   return type;
 }
 
 /**

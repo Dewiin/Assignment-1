@@ -86,6 +86,14 @@ bool Hand::isEmpty() const {
 * @post: Reverse the hand
 */
 void Hand::Reverse() {
+    // size_t i = 0, j = cards_.size()-1;
+    // while(i < j){
+    //     swap(cards_[i], cards_[j]);
+    //     i++;
+    //     j--;
+    // }
+
+    //std::reverse
     reverse(cards_.begin(), cards_.end());
 }
 
@@ -98,19 +106,16 @@ hand
 */
 int Hand::PlayCard() {
     if(!isEmpty()) {
-        PointCard front = cards_.front();
-
-        //remove card from hand
-        cards_.pop_front();
-
         //if not playable
-        if(!front.isPlayable()){
+        if(!cards_.front().isPlayable()){
+            cards_.pop_front();
             throw runtime_error("Card is not playable.");
         }
-
         //get the integer value of the points in the front card of the hand
-        int points = stoi(front.getInstruction());
-            
+        int points = stoi(cards_.front().getInstruction());
+
+        cards_.pop_front();
+        
         return points;
     }
     throw runtime_error("Hand is empty.");

@@ -39,7 +39,9 @@ int main() {
     hand1.addCard(point_deck.Draw());
     hand1.addCard(point_deck.Draw());
 
-    cout << hand1.PlayCard();
+    for(auto i : hand1.getCards()){
+        cout << i.getDrawn() << endl;
+    }
 
     return 0;
 }

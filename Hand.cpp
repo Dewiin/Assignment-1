@@ -45,7 +45,10 @@ Hand& Hand::operator=(const Hand& other) {
 */
 Hand::Hand(Hand&& other) {
     //transfer contents
-    cards_ = move(other.cards_);
+    cards_ = other.cards_;
+
+    //clear other
+    other.cards_.clear();
 }
 
 /**
@@ -56,7 +59,10 @@ Hand::Hand(Hand&& other) {
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
         //transfer contents
-        cards_ = move(other.cards_);
+        cards_ = other.cards_;
+
+        //clear other
+        other.cards_.clear();
     }
 
     return *this;

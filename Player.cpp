@@ -10,26 +10,27 @@ CSCI 335 Fall Term 2023
 * @post: Construct a new Player object
 */
 Player::Player(){
-    Hand initial_hand;
-    setHand(initial_hand);
     score_ = 0;
-    opponent_ = nullptr;
-    actiondeck_ = nullptr;
-    pointdeck_ = nullptr;
+    opponent_ = new Player;
+    actiondeck_ = new Deck<ActionCard>;
+    pointdeck_ = new Deck<PointCard>;
 }
 
 /**
 * @post: Destroy the Player object
 */
 Player::~Player() {
-    if(actiondeck_ != nullptr){
-        delete [] actiondeck_;
-        actiondeck_ = nullptr;
-    }
-    if(pointdeck_ != nullptr){
-        delete [] pointdeck_;
-        pointdeck_ = nullptr;
-    }
+    //delete actiondeck
+    delete [] actiondeck_;
+    actiondeck_ = nullptr;
+
+    //delete pointdeck
+    delete [] pointdeck_;
+    pointdeck_ = nullptr;
+
+    //delete opponent
+    delete opponent_;
+    opponent_ = nullptr;
 }
 
 /**
@@ -69,22 +70,68 @@ void Player::setScore(const int& score) {
 * PLAYING ACTION CARD: [instruction]
 */
 void Player::play(ActionCard&& card) {
+    //if the card is playable
     if(card.isPlayable()){
+        //report the instructions of the card
         cout << "PLAYING ACTION CARD: " << card.getInstruction();
 
-
+        //REVERSE HAND
         if(card.getInstruction() == "REVERSE HAND") {
             hand_.Reverse();
         }
-        else if(card.getInstruction() == "SWAP HAND WITH OPPONENT") {
-            if(opponent_ != nullptr) {
-                Hand temp = hand_;
-                setHand(opponent_->getHand());
-                opponent_->setHand(temp);
-            }
-            throw runtime_error("No valid opponent.");
+
+        //SWAP HAND WITH OPPONENT
+        if(card.getInstruction() == "SWAP HAND WITH OPPONENT") {
+            //move constructor to make temp hand
+            Hand temp(move(hand_));
+            //swap this->hand with opponent
+            setHand(opponent_->getHand());
+            //opponent swaps hand with this->hand
+            opponent_->setHand(temp);
         }  
 
+        //DRAW|PLAY
+        else{ 
+            //initialize vector to store each word in the instructions
+            vector<string> parsed_words;
+            //initialize a string to append each character that is not whitespace
+            string word = "", instruction = card.getInstruction();
+
+            //parsing through the instructions
+            for(int i = 0; i < instruction.size(); i++){
+                //if whitespace
+                if(instruction[i] == ' '){
+                    //push back the word into the vector
+                    parsed_words.push_back(word);
+                    //reset
+                    word = "";
+                }
+                
+                //if not whitespace
+                else{
+                    //append the character
+                    word += instruction[i];
+                }
+            }
+
+            //if draw
+            if(parsed_words[0] == "DRAW"){
+                for(int i = 0; i < stoi(parsed_words[1]); i++){
+                    drawPointCard();
+                }
+            }
+            //if play
+            else{
+                for(int i = 0; i < stoi(parsed_words[1]); i++){
+                    playPointCard();
+                }
+            }
+
+        }
+    }
+    else{
+        //if card is not playable
+        throw runtime_error("Card is not playable");
     }
 }
 
@@ -93,7 +140,7 @@ void Player::play(ActionCard&& card) {
 */
 void Player::drawPointCard() {
     if(pointdeck_ != nullptr && !pointdeck_->IsEmpty()){
-        hand_.addCard(pointdeck_->Draw());
+        hand_.addCard(move(pointdeck_->Draw()));
     }
 }
 

@@ -36,10 +36,8 @@ Hand::Hand(const Hand& other) {
 */
 Hand& Hand::operator=(const Hand& other) {
     if(this != &other){
-        if(!cards_.empty()){
-            //clear current deque
-            cards_.clear();
-        }
+        //clear current deque
+        cards_.clear();
 
         //manually copy each card in other deque to this->deque
         for(auto card : other.cards_){
@@ -69,10 +67,9 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
-        if(!cards_.empty()){
-            //clear content in cards_
-            cards_.clear();
-        }
+        //clear content in cards_
+        cards_.clear();
+        
         //copy contents
         cards_ = other.cards_;
 

@@ -69,6 +69,10 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
+        if(!cards_.empty()){
+            //clear content in cards_
+            cards_.clear();
+        }
         //copy contents
         cards_ = other.cards_;
 

@@ -16,9 +16,7 @@ Deck<CardType>::Deck() {}
 * @post: Destroy the Deck object
 */
 template <class CardType>
-Deck<CardType>::~Deck() {
-    cards_.clear();
-}
+Deck<CardType>::~Deck() {}
 
 /**
 * @post: Add a Card to the Deck

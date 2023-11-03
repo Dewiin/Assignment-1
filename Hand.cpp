@@ -23,10 +23,7 @@ Hand::~Hand() {
 * @param: other Hand object
 */
 Hand::Hand(const Hand& other) {
-    //manually copy each card in other deque to this->deque
-    for(auto card : other.cards_){
-        cards_.push_back(card);
-    }
+    cards_ = other.cards_;
 }
 
 /**
@@ -36,13 +33,7 @@ Hand::Hand(const Hand& other) {
 */
 Hand& Hand::operator=(const Hand& other) {
     if(this != &other){
-        //clear current deque
-        cards_.clear();
-
-        //manually copy each card in other deque to this->deque
-        for(auto card : other.cards_){
-            cards_.push_back(card);
-        }
+        cards_ = other.cards_;
     }
 
     return *this;

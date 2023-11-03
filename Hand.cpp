@@ -54,7 +54,8 @@ Hand::Hand(Hand&& other) {
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
         //transfer contents
-        cards_ = move(other.cards_);
+        //cards_ = move(other.cards_);
+        swap(cards_, other.cards_);
     }
 
     return *this;

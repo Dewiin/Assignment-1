@@ -140,7 +140,7 @@ void Player::play(ActionCard&& card) {
 */
 void Player::drawPointCard() {
     if(pointdeck_ != nullptr && !pointdeck_->IsEmpty()){
-        hand_.addCard(move(pointdeck_->Draw()));
+        hand_.addCard(pointdeck_->Draw());
     }
 }
 

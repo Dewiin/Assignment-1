@@ -9,14 +9,12 @@ CSCI 335 Fall Term 2023
 /**
 * @post: Construct a new Hand object
 */
-Hand::Hand() : cards_() {}
+Hand::Hand() {}
 
 /**
 * @post: Destroy the Hand object
 */
-Hand::~Hand() {
-    cards_.clear();
-}
+Hand::~Hand() {}
 
 /**
 * Copy Constructor
@@ -45,10 +43,7 @@ Hand& Hand::operator=(const Hand& other) {
 */
 Hand::Hand(Hand&& other) {
     //transfer contents
-    cards_ = other.cards_;
-
-    //clear other
-    other.cards_.clear();
+    cards_ = move(other.cards_);
 }
 
 /**
@@ -59,10 +54,7 @@ Hand::Hand(Hand&& other) {
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
         //transfer contents
-        cards_ = other.cards_;
-
-        //clear other
-        other.cards_.clear();
+        cards_ = move(other.cards_);
     }
 
     return *this;

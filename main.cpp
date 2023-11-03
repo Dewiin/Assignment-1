@@ -8,7 +8,7 @@ int main() {
     //point card 1
     PointCard point1;
     point1.setInstruction("4");
-    //cout << point1.isPlayable();
+    //cout << point1.isPlayable() << endl;
 
     //point card 2
     PointCard point2; 
@@ -31,6 +31,10 @@ int main() {
     point_deck.AddCard(point2);
     point_deck.AddCard(point3);
     point_deck.AddCard(point4);
+
+    for(auto j : point_deck.getDeck()){
+        cout << j.getDrawn() << endl;
+    }
 
     //hand
     Hand hand1;

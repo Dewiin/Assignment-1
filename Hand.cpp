@@ -92,8 +92,7 @@ const deque<PointCard>& Hand::getCards() const {
 * @param PointCard object
 */
 void Hand::addCard(PointCard&& card) {
-    card.setDrawn(true);
-    cards_.push_back(move(card));
+    cards_.push_back(card);
 }
 
 /**

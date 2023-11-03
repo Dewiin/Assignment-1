@@ -17,7 +17,7 @@ PointCard::PointCard() {
  * For a card to be playable, it has to be drawn and the instruction has to be a valid number
 */
 bool PointCard::isPlayable() {
-    if(!getDrawn()){ 
+    if(!getDrawn() || getInstruction().empty()){ 
         return false;
     }
     for(char c : getInstruction()){

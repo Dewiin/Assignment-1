@@ -132,12 +132,13 @@ int Hand::PlayCard() {
             //remove from hand
             cards_.pop_front();
             //throw exception
-            throw runtime_error("Card is not playable.");
+            throw out_of_range("Card is not playable.");
         }
         //else (if playable)
 
         //get the integer value of the points in the front card of the hand
-        int points = stoi(cards_.front().getInstruction());
+        int points = 0;
+        points = stoi(cards_.front().getInstruction());
         //remove from hand
         cards_.pop_front();
         //return points
@@ -146,5 +147,5 @@ int Hand::PlayCard() {
     //else (if empty)
 
     //throw exception   
-    throw runtime_error("Hand is empty.");
+    throw out_of_range("Hand is empty.");
 }

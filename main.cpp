@@ -6,43 +6,40 @@ using namespace std;
 
 int main() {
     //point card 1
-    PointCard point1; 
-    point1.setDrawn(true);
+    PointCard point1;
     point1.setInstruction("4");
     //cout << point1.isPlayable();
 
     //point card 2
     PointCard point2; 
-    point2.setDrawn(true);
     point2.setInstruction("3");
     //cout << point2.isPlayable();
 
     //point card 3
     PointCard point3; 
-    point3.setDrawn(true);
     point3.setInstruction("6");
     //cout << point3.isPlayable();
 
     //point card 4
     PointCard point4; 
-    point4.setDrawn(true);
     point4.setInstruction("14");
     //cout << point4.isPlayable();
 
+    //deck
+    Deck<PointCard> point_deck;
+    point_deck.AddCard(point1);
+    point_deck.AddCard(point2);
+    point_deck.AddCard(point3);
+    point_deck.AddCard(point4);
+
     //hand
     Hand hand1;
-    hand1.addCard(move(point1));
-    hand1.addCard(move(point2));
-    hand1.addCard(move(point3));
-    hand1.addCard(move(point4));
+    hand1.addCard(point_deck.Draw());
+    hand1.addCard(point_deck.Draw());
+    hand1.addCard(point_deck.Draw());
+    hand1.addCard(point_deck.Draw());
 
-    Hand hand2;
-    hand2 = hand1;
-
-    for(auto i : hand2.getCards()){
-        cout << hand2.PlayCard() << endl;
-    }
-
+    cout << hand1.PlayCard();
 
     return 0;
 }

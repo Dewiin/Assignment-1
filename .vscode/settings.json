@@ -16,6 +16,7 @@
         "iostream": "cpp",
         "new": "cpp",
         "deque": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "__bit_reference": "cpp"
     }
 }

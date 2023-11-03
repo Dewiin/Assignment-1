@@ -9,7 +9,7 @@ CSCI 335 Fall Term 2023
 /**
 * @post: Construct a new Hand object
 */
-Hand::Hand(){}
+Hand::Hand() : cards_() {}
 
 /**
 * @post: Destroy the Hand object
@@ -119,8 +119,7 @@ int Hand::PlayCard() {
         //else (if playable)
 
         //get the integer value of the points in the front card of the hand
-        int points = 0;
-        points = stoi(cards_.front().getInstruction());
+        int points = stoi(cards_.front().getInstruction());
         //remove from hand
         cards_.pop_front();
         //return points

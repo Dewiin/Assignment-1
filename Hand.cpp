@@ -44,7 +44,7 @@ Hand& Hand::operator=(const Hand& other) {
 * @param: other Hand object
 */
 Hand::Hand(Hand&& other) {
-    //copy contents
+    //transfer contents
     cards_ = move(other.cards_);
 }
 
@@ -55,10 +55,7 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
-        //clear content in cards_
-        cards_.clear();
-        
-        //copy contents
+        //transfer contents
         cards_ = move(other.cards_);
     }
 
@@ -122,7 +119,8 @@ int Hand::PlayCard() {
         //else (if playable)
 
         //get the integer value of the points in the front card of the hand
-        int points = stoi(cards_.front().getInstruction());
+        int points = 0;
+        points = stoi(cards_.front().getInstruction());
         //remove from hand
         cards_.pop_front();
         //return points

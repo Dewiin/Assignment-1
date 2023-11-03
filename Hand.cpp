@@ -56,7 +56,7 @@ Hand& Hand::operator=(const Hand& other) {
 */
 Hand::Hand(Hand&& other) {
     //copy contents
-    cards_ = move(other.cards_);
+    cards_ = other.cards_;
 
     //clear other cards_
     other.cards_.clear();
@@ -69,13 +69,8 @@ Hand::Hand(Hand&& other) {
 */
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
-        if(!cards_.empty()){
-            //clear current deque in hand
-            cards_.clear();
-        }
-
         //copy contents
-        cards_ = move(other.cards_);
+        cards_ = other.cards_;
 
         //clear other.cards_
         other.cards_.clear();

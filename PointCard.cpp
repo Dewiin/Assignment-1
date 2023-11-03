@@ -25,6 +25,9 @@ bool PointCard::isPlayable() {
             return false;
         }
     }
+    if(!(1 <= stoi(getInstruction()) <= 99)){
+        return false;
+    }
     return true;
 } 
 /**

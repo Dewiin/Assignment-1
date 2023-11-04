@@ -73,7 +73,7 @@ const deque<PointCard>& Hand::getCards() const {
 */
 void Hand::addCard(PointCard&& card) {
     card.setDrawn(true);
-    cards_.push_back(card);
+    cards_.push_back(move(card));
 }
 
 /**
@@ -87,15 +87,12 @@ bool Hand::isEmpty() const {
 * @post: Reverse the hand
 */
 void Hand::Reverse() {
-    // size_t i = 0, j = cards_.size()-1;
-    // while(i < j){
-    //     swap(cards_[i], cards_[j]);
-    //     i++;
-    //     j--;
-    // }
-
-    //std::reverse
-    reverse(cards_.begin(), cards_.end());
+    size_t i = 0, j = cards_.size()-1;
+    while(i < j){
+        swap(cards_[i], cards_[j]);
+        i++;
+        j--;
+    }
 }
 
 /**

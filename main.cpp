@@ -9,6 +9,8 @@ int main() {
     PointCard point1;
     point1.setInstruction("4");
     //cout << point1.isPlayable() << endl;
+    point1.Print();
+    cout << endl;
 
     //point card 2
     PointCard point2; 
@@ -32,20 +34,22 @@ int main() {
     point_deck.AddCard(point3);
     point_deck.AddCard(point4);
 
-    for(auto j : point_deck.getDeck()){
-        cout << j.getDrawn() << endl;
-    }
+    
+    PointCard drawn2 = point_deck.Draw();
+    PointCard drawn3 = point_deck.Draw();
+    PointCard drawn4 = point_deck.Draw();
+
 
     //hand
-    Hand hand1;
-    hand1.addCard(point_deck.Draw());
-    hand1.addCard(point_deck.Draw());
-    hand1.addCard(point_deck.Draw());
-    hand1.addCard(point_deck.Draw());
+    // Hand hand1;
+    // hand1.addCard();
+    // hand1.addCard();
+    // hand1.addCard();
+    // hand1.addCard();
 
-    for(auto i : hand1.getCards()){
-        cout << i.getDrawn() << endl;
-    }
+    // for(auto i : hand1.getCards()){
+    //     cout << i.getDrawn() << endl;
+    // }
 
     return 0;
 }

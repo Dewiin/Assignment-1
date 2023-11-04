@@ -37,6 +37,7 @@ CardType&& Deck<CardType>::Draw() {
     if(!IsEmpty()) { 
         CardType&& drawn = move(cards_.back());
         cards_.pop_back();
+        drawn.setDrawn(true);
 
         return move(drawn);
     }

@@ -54,8 +54,7 @@ Hand::Hand(Hand&& other) {
 Hand& Hand::operator=(Hand&& other) {
     if(this != &other){
         //transfer contents
-        //cards_ = move(other.cards_);
-        swap(cards_, other.cards_);
+        cards_ = move(other.cards_);
     }
 
     return *this;
@@ -73,7 +72,6 @@ const deque<PointCard>& Hand::getCards() const {
 * @param PointCard object
 */
 void Hand::addCard(PointCard&& card) {
-    card.setDrawn(true);
     cards_.push_back(card);
 }
 
@@ -109,21 +107,19 @@ hand
 int Hand::PlayCard() {
     //check if not empty
     if(!isEmpty()) {
-        //if not playable
-        if(!cards_.front().isPlayable()){
+        //if playable
+        if(cards_.front().isPlayable()){
+            //get the integer value of the points in the front card of the hand
+            int points = stoi(cards_.front().getInstruction());
             //remove from hand
             cards_.pop_front();
-            //throw exception
-            throw runtime_error("Card is not playable.");
+            //return points
+            return points;
         }
-        //else (if playable)
-
-        //get the integer value of the points in the front card of the hand
-        int points = stoi(cards_.front().getInstruction());
-        //remove from hand
+        //if not playable
         cards_.pop_front();
-        //return points
-        return points;
+        //throw exception
+        throw runtime_error("Card is not playable.");
     }
     //else (if empty)
 

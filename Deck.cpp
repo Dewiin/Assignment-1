@@ -24,7 +24,7 @@ Deck<CardType>::~Deck() {}
 */
 template <class CardType>
 void Deck<CardType>::AddCard(const CardType& card) {
-    cards_.push_back(card);
+    cards_.push_back(move(card));
 }
 
 /**
@@ -37,7 +37,6 @@ CardType&& Deck<CardType>::Draw() {
     if(!IsEmpty()) { 
         CardType&& drawn = move(cards_.back());
         cards_.pop_back();
-        drawn.setDrawn(true);
 
         return move(drawn);
     }

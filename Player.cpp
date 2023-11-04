@@ -11,9 +11,9 @@ CSCI 335 Fall Term 2023
 */
 Player::Player(){
     score_ = 0;
-    opponent_ = new Player();
-    actiondeck_ = new Deck<ActionCard>();
-    pointdeck_ = new Deck<PointCard>();
+    opponent_ = nullptr;
+    actiondeck_ = nullptr;
+    pointdeck_ = nullptr;
 }
 
 /**
@@ -21,13 +21,19 @@ Player::Player(){
 */
 Player::~Player() {
     //delete actiondeck
-    delete actiondeck_;
+    if(actiondeck_ != nullptr){
+        delete actiondeck_;
+    }
 
     //delete pointdeck
-    delete pointdeck_;
+    if(pointdeck_ != nullptr){
+        delete pointdeck_;
+    }
 
     //delete opponent
-    delete opponent_;
+    if(opponent_ != nullptr){
+        delete opponent_;
+    }
 }
 
 /**

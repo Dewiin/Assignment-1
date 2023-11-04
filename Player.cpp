@@ -135,10 +135,6 @@ void Player::play(ActionCard&& card) {
             }
         }
     }
-    else{
-        //if card is not playable
-        throw runtime_error("Card is not playable");
-    }
 }
 
 /**

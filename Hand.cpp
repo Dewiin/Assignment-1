@@ -120,7 +120,7 @@ int Hand::PlayCard() {
         //if not playable
         cards_.pop_front();
         
-        throw runtime_error("Card is not playable");
+        return points;
     }
     //else (if empty)
 

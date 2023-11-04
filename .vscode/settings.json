@@ -18,6 +18,8 @@
         "deque": "cpp",
         "string": "cpp",
         "__bit_reference": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "__config": "cpp",
+        "__nullptr": "cpp"
     }
 }

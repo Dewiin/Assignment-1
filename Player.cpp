@@ -11,9 +11,9 @@ CSCI 335 Fall Term 2023
 */
 Player::Player(){
     score_ = 0;
-    opponent_ = new Player();
-    actiondeck_ = new Deck<ActionCard>();
-    pointdeck_ = new Deck<PointCard>();
+    opponent_ = nullptr;
+    actiondeck_ = nullptr;
+    pointdeck_ = nullptr;
 }
 
 /**
@@ -147,7 +147,9 @@ void Player::drawPointCard() {
 s score
 */
 void Player::playPointCard() {
-    setScore(getScore() + hand_.PlayCard());
+    if(!hand_.isEmpty()){
+        setScore(getScore() + hand_.PlayCard());
+    }
 }
 
 /**

@@ -78,7 +78,7 @@ void Player::play(ActionCard&& card) {
         string instructions = card.getInstruction();
 
         //report the instructions of the card
-        cout << "PLAYING ACTION CARD: " << instructions;
+        cout << "PLAYING ACTION CARD: " << instructions << endl;
 
         //REVERSE HAND
         if(instructions == "REVERSE HAND") {
@@ -87,12 +87,14 @@ void Player::play(ActionCard&& card) {
 
         //SWAP HAND WITH OPPONENT
         if(instructions == "SWAP HAND WITH OPPONENT") {
-            //move constructor to make temp hand
-            Hand temp = hand_;
-            //swap this->hand with opponent
-            setHand(opponent_->getHand());
-            //opponent swaps hand with this->hand
-            opponent_->setHand(temp);
+            if(opponent_ != nullptr){
+                //move constructor to make temp hand
+                Hand temp = hand_;
+                //swap this->hand with opponent
+                setHand(opponent_->getHand());
+                //opponent swaps hand with this->hand
+                opponent_->setHand(temp);
+            }
         }  
 
         //DRAW|PLAY
@@ -131,7 +133,6 @@ void Player::play(ActionCard&& card) {
                     playPointCard();
                 }
             }
-
         }
     }
     else{
@@ -144,7 +145,7 @@ void Player::play(ActionCard&& card) {
 * @post: Draw a point card and place it in the player’s hand
 */
 void Player::drawPointCard() {
-    if(!pointdeck_->IsEmpty()){
+    if((pointdeck_ != nullptr) && (!pointdeck_->IsEmpty())){
         hand_.addCard(pointdeck_->Draw());
     }
 }
@@ -154,9 +155,7 @@ void Player::drawPointCard() {
 s score
 */
 void Player::playPointCard() {
-    if(!hand_.isEmpty()){
-        setScore(getScore() + hand_.PlayCard());
-    }
+    setScore(getScore() + hand_.PlayCard());
 }
 
 /**

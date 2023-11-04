@@ -33,11 +33,10 @@ int main() {
     point_deck.AddCard(point4);
 
     PointCard drawn1 = point_deck.Draw();
-    cout << drawn1.getInstruction() << endl;
 
     //hand
     Hand hand1;
-    hand1.addCard(move(point1));
+    hand1.addCard(move(drawn1));
     hand1.addCard(move(point2));
     hand1.addCard(move(point3));
     hand1.addCard(move(point4));

@@ -22,15 +22,12 @@ Player::Player(){
 Player::~Player() {
     //delete actiondeck
     delete actiondeck_;
-    actiondeck_ = nullptr;
 
     //delete pointdeck
     delete pointdeck_;
-    pointdeck_ = nullptr;
 
     //delete opponent
     delete opponent_;
-    opponent_ = nullptr;
 }
 
 /**
@@ -72,18 +69,20 @@ void Player::setScore(const int& score) {
 void Player::play(ActionCard&& card) {
     //if the card is playable
     if(card.isPlayable()){
+        string instructions = card.getInstruction();
+
         //report the instructions of the card
-        cout << "PLAYING ACTION CARD: " << card.getInstruction();
+        cout << "PLAYING ACTION CARD: " << instructions;
 
         //REVERSE HAND
-        if(card.getInstruction() == "REVERSE HAND") {
+        if(instructions == "REVERSE HAND") {
             hand_.Reverse();
         }
 
         //SWAP HAND WITH OPPONENT
-        if(card.getInstruction() == "SWAP HAND WITH OPPONENT") {
+        if(instructions == "SWAP HAND WITH OPPONENT") {
             //move constructor to make temp hand
-            Hand temp(move(hand_));
+            Hand temp = hand_;
             //swap this->hand with opponent
             setHand(opponent_->getHand());
             //opponent swaps hand with this->hand
@@ -92,15 +91,15 @@ void Player::play(ActionCard&& card) {
 
         //DRAW|PLAY
         else{ 
-            //initialize vector to store each word in the instructions
+            //initialize vector to store each word in the instruction
             vector<string> parsed_words;
             //initialize a string to append each character that is not whitespace
-            string word = "", instruction = card.getInstruction();
+            string word = "";
 
             //parsing through the instructions
-            for(int i = 0; i < instruction.size(); i++){
+            for(int i = 0; i < instructions.size(); i++){
                 //if whitespace
-                if(instruction[i] == ' '){
+                if(instructions[i] == ' '){
                     //push back the word into the vector
                     parsed_words.push_back(word);
                     //reset
@@ -110,7 +109,7 @@ void Player::play(ActionCard&& card) {
                 //if not whitespace
                 else{
                     //append the character
-                    word += instruction[i];
+                    word += instructions[i];
                 }
             }
 
@@ -139,7 +138,7 @@ void Player::play(ActionCard&& card) {
 * @post: Draw a point card and place it in the player’s hand
 */
 void Player::drawPointCard() {
-    if(pointdeck_ != nullptr && !pointdeck_->IsEmpty()){
+    if(!pointdeck_->IsEmpty()){
         hand_.addCard(pointdeck_->Draw());
     }
 }

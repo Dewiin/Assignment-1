@@ -108,17 +108,21 @@ hand
 int Hand::PlayCard() {
     //check if not empty
     if(!isEmpty()) {
+        int points = 0;
+
         //if playable
         if(cards_.front().isPlayable()){
             //get the integer value of the points in the front card of the hand
-            int points = stoi(cards_.front().getInstruction());
+            points = stoi(cards_.front().getInstruction());
             //remove from hand
             cards_.pop_front();
             //return points
             return points;
         }
+
         //if not playable
         cards_.pop_front();
+        return points;
     }
     //else (if empty)
 

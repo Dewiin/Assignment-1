@@ -70,67 +70,64 @@ void Player::setScore(const int& score) {
 * PLAYING ACTION CARD: [instruction]
 */
 void Player::play(ActionCard&& card) {
-    //if the card is playable
-    if(card.isPlayable()){
-        string instructions = card.getInstruction();
+    //get instructions
+    string instructions = card.getInstruction();
 
-        //report the instructions of the card
-        cout << "PLAYING ACTION CARD: " << instructions;
+    //report the instructions of the card
+    cout << "PLAYING ACTION CARD: " << instructions << endl;
 
-        //REVERSE HAND
-        if(instructions == "REVERSE HAND") {
-            hand_.Reverse();
+    //REVERSE HAND
+    if(instructions == "REVERSE HAND") {
+        hand_.Reverse();
+    }
+
+    //SWAP HAND WITH OPPONENT
+    else if(instructions == "SWAP HAND WITH OPPONENT") {
+        //move constructor to make temp hand
+        Hand temp = hand_;
+        //swap this->hand with opponent
+        setHand(opponent_->getHand());
+        //opponent swaps hand with this->hand
+        opponent_->setHand(temp);
+    }  
+
+    //DRAW|PLAY
+    else{ 
+        //initialize vector to store each word in the instruction
+        vector<string> parsed_words;
+        //initialize a string to append each character that is not whitespace
+        string word = "";
+
+        //parsing through the instructions
+        for(int i = 0; i < instructions.size(); i++){
+            //if whitespace
+            if(instructions[i] == ' '){
+                //push back the word into the vector
+                parsed_words.push_back(word);
+                //reset
+                word = "";
+            }
+            
+            //if not whitespace
+            else{
+                //append the character
+                word += instructions[i];
+            }
         }
 
-        //SWAP HAND WITH OPPONENT
-        else if(instructions == "SWAP HAND WITH OPPONENT") {
-            //move constructor to make temp hand
-            Hand temp = hand_;
-            //swap this->hand with opponent
-            setHand(opponent_->getHand());
-            //opponent swaps hand with this->hand
-            opponent_->setHand(temp);
-        }  
-
-        //DRAW|PLAY
-        else{ 
-            //initialize vector to store each word in the instruction
-            vector<string> parsed_words;
-            //initialize a string to append each character that is not whitespace
-            string word = "";
-
-            //parsing through the instructions
-            for(int i = 0; i < instructions.size(); i++){
-                //if whitespace
-                if(instructions[i] == ' '){
-                    //push back the word into the vector
-                    parsed_words.push_back(word);
-                    //reset
-                    word = "";
-                }
-                
-                //if not whitespace
-                else{
-                    //append the character
-                    word += instructions[i];
-                }
+        //if draw
+        if(parsed_words[0] == "DRAW"){
+            for(int i = 0; i < stoi(parsed_words[1]); i++){
+                drawPointCard();
             }
-
-            //if draw
-            if(parsed_words[0] == "DRAW"){
-                for(int i = 0; i < stoi(parsed_words[1]); i++){
-                    drawPointCard();
-                }
+        }
+        //if play
+        else if(parsed_words[0] == "PLAY"){
+            for(int i = 0; i < stoi(parsed_words[1]); i++){
+                playPointCard();
             }
-            //if play
-            else if(parsed_words[0] == "PLAY"){
-                for(int i = 0; i < stoi(parsed_words[1]); i++){
-                    playPointCard();
-                }
-            }
-        } // end else
-
-    }//end if playable
+        }
+    } // end else
 }
 
 /**

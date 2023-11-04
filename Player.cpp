@@ -86,7 +86,7 @@ void Player::play(ActionCard&& card) {
         }
 
         //SWAP HAND WITH OPPONENT
-        if(instructions == "SWAP HAND WITH OPPONENT") {
+        else if(instructions == "SWAP HAND WITH OPPONENT") {
             if(opponent_ != nullptr){
                 //move constructor to make temp hand
                 Hand temp = hand_;

@@ -141,7 +141,7 @@ void Player::play(ActionCard&& card) {
 * @post: Draw a point card and place it in the player’s hand
 */
 void Player::drawPointCard() {
-    if((pointdeck_ != nullptr) && (!pointdeck_->IsEmpty())){
+    if(pointdeck_ != nullptr){
         hand_.addCard(pointdeck_->Draw());
     }
 }

@@ -11,9 +11,9 @@ CSCI 335 Fall Term 2023
 */
 Player::Player(){
     score_ = 0;
-    opponent_ = nullptr;
-    actiondeck_ = nullptr;
-    pointdeck_ = nullptr;
+    opponent_ = new Player();
+    actiondeck_ = new Deck<ActionCard>();
+    pointdeck_ = new Deck<PointCard>();
 }
 
 /**
@@ -21,19 +21,16 @@ Player::Player(){
 */
 Player::~Player() {
     //delete actiondeck
-    if(actiondeck_ != nullptr){
-        delete actiondeck_;
-    }
+    delete actiondeck_;
+    actiondeck_ = nullptr;
 
     //delete pointdeck
-    if(pointdeck_ != nullptr){
-        delete pointdeck_;
-    }
+    delete pointdeck_;
+    pointdeck_ = nullptr;
 
     //delete opponent
-    if(opponent_ != nullptr){
-        delete opponent_;
-    }
+    delete opponent_;
+    opponent_ = nullptr;
 }
 
 /**
@@ -78,7 +75,7 @@ void Player::play(ActionCard&& card) {
         string instructions = card.getInstruction();
 
         //report the instructions of the card
-        cout << "PLAYING ACTION CARD: " << instructions << endl;
+        cout << "PLAYING ACTION CARD: " << instructions;
 
         //REVERSE HAND
         if(instructions == "REVERSE HAND") {
@@ -87,14 +84,12 @@ void Player::play(ActionCard&& card) {
 
         //SWAP HAND WITH OPPONENT
         else if(instructions == "SWAP HAND WITH OPPONENT") {
-            if(opponent_ != nullptr){
-                //move constructor to make temp hand
-                Hand temp = hand_;
-                //swap this->hand with opponent
-                setHand(opponent_->getHand());
-                //opponent swaps hand with this->hand
-                opponent_->setHand(temp);
-            }
+            //move constructor to make temp hand
+            Hand temp = hand_;
+            //swap this->hand with opponent
+            setHand(opponent_->getHand());
+            //opponent swaps hand with this->hand
+            opponent_->setHand(temp);
         }  
 
         //DRAW|PLAY
@@ -128,13 +123,14 @@ void Player::play(ActionCard&& card) {
                 }
             }
             //if play
-            else{
+            else if(parsed_words[0] == "PLAY"){
                 for(int i = 0; i < stoi(parsed_words[1]); i++){
                     playPointCard();
                 }
             }
-        }
-    }
+        } // end else
+
+    }//end if playable
 }
 
 /**
@@ -142,7 +138,7 @@ void Player::play(ActionCard&& card) {
 */
 void Player::drawPointCard() {
     if(pointdeck_ != nullptr){
-        hand_.addCard(pointdeck_->Draw());
+        hand_.addCard(move(pointdeck_->Draw()));
     }
 }
 

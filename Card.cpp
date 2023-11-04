@@ -15,11 +15,6 @@ Card::~Card() {
     delete[] bitmap_;
     //set pointer to nullptr
     bitmap_ = nullptr;
-
-    //clear instructions
-    instruction_.clear();
-    //reset drawn bool
-    drawn_ = false;
 }
 
 /**
